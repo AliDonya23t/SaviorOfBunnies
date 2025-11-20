@@ -335,6 +335,6 @@ public class CutsceneController : MonoBehaviour
         rt.anchorMax = Vector2.one;
         rt.offsetMin = Vector2.zero;
         rt.offsetMax = Vector2.zero;
-        img.preserveAspect = true;
+        img.preserveAspect = false;
     }
 }
