@@ -21,6 +21,9 @@ public class Diamond : MonoBehaviour
     private Collider2D col;
     private SpriteRenderer sr;
     private AudioSource audioSource;
+    private Vector3 originalScale;
+    private Color originalColor;
+    private bool isCollecting = false;
 
     void Awake()
     {
@@ -28,6 +31,18 @@ public class Diamond : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
+
+        if (sr != null) originalColor = sr.color;
+        originalScale = transform.localScale;
+    }
+
+    private void OnEnable()
+    {
+        // ری‌ست وضعیت وقتی دوباره فعال می‌شود
+        isCollecting = false;
+        if (sr != null) sr.color = originalColor;
+        transform.localScale = originalScale;
+        if (col != null) col.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -40,6 +55,9 @@ public class Diamond : MonoBehaviour
 
     private void Collect()
     {
+        if (isCollecting) return;
+        isCollecting = true;
+
         if (col != null) col.enabled = false;
 
         if (GameManager.Instance != null)
@@ -51,13 +69,13 @@ public class Diamond : MonoBehaviour
             audioSource.Play();
         }
 
-        StartCoroutine(VanishAndDestroy());
+        StartCoroutine(VanishAndDisable());
     }
 
-    private IEnumerator VanishAndDestroy()
+    private IEnumerator VanishAndDisable()
     {
         float elapsed = 0f;
-        Color startColor = sr.color;
+        Color startColor = sr != null ? sr.color : Color.white;
         Vector3 startScale = transform.localScale;
 
         while (elapsed < vanishDuration)
@@ -77,9 +95,11 @@ public class Diamond : MonoBehaviour
             yield return null;
         }
 
+        // اگر صدا هنوز پخشه کمی صبر کن اما نه بی نهایت
         if (audioSource != null && audioSource.isPlaying)
             yield return new WaitForSeconds(0.05f);
 
-        Destroy(gameObject);
+        // ❗ به جای Destroy -> غیرفعال کن تا Pool بتواند آن را دوباره استفاده کند
+        gameObject.SetActive(false);
     }
 }

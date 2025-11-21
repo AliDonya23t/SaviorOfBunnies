@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 9202547251648475098}
   - component: {fileID: 9202547251648475101}
   m_Layer: 0
-  m_Name: Blue Gem
+  m_Name: Diamond
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
