@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BatterySystem : MonoBehaviour
@@ -49,6 +51,12 @@ public class BatterySystem : MonoBehaviour
     {
         // لود منوی اصلی
         //SceneManager.LoadScene("MainMenu");
+        if (GameManager.Instance == null)
+        {
+            CoinsManager.CollectedCoins = int.Parse(GetComponent<TextMeshProUGUI>().text);
+            SceneManager.LoadScene("MainMenu");
+            return;
+        }
         GameManager.Instance.LoadNextScene();
     }
 

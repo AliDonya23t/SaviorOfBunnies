@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
@@ -56,6 +58,12 @@ public class PauseManager : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1f;
+        if (GameManager.Instance == null)
+        {
+            CoinsManager.CollectedCoins = int.Parse(GetComponent<TextMeshProUGUI>().text);
+            SceneManager.LoadScene("MainMenu");
+            return;
+        }
         GameManager.Instance.LoadNextScene();
     }
 }
