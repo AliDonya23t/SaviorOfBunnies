@@ -53,8 +53,7 @@ public class PlatformPooler : MonoBehaviour
             GameObject go = activeList[i];
             if (go == null) { activeList.RemoveAt(i); continue; }
 
-            // فرض می‌کنیم pivot در مرکز است؛ می‌تونیم از collider bounds هم استفاده کنیم
-            float rightEdge = go.transform.position.x + 0.5f; // اگر پلتفرم عرض داشته باشه، مقدار مناسب قرار بده
+            float rightEdge = go.transform.position.x + 0.5f; // فرض pivot در مرکز
             if (rightEdge < camLeft - despawnBuffer)
             {
                 go.SetActive(false);
@@ -82,6 +81,22 @@ public class PlatformPooler : MonoBehaviour
         go.transform.position = new Vector3(spawnX, spawnY, 0f);
         go.transform.rotation = Quaternion.identity;
         go.SetActive(true);
+
+        // 🔹 ریست کردن الماس‌ها روی پلتفرم
+        foreach (Transform child in go.transform)
+        {
+            Diamond d = child.GetComponent<Diamond>();
+            if (d != null)
+            {
+                child.gameObject.SetActive(true);
+
+                // فقط رنگ و Collider ریست شود، scale دست نخورده باقی بماند
+                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.color = new Color(1, 1, 1, 1);
+                Collider2D col = child.GetComponent<Collider2D>();
+                if (col != null) col.enabled = true;
+            }
+        }
 
         activeList.Add(go);
         lastSpawnX = spawnX;

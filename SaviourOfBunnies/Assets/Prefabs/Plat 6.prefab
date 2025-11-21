@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7384771289458575596}
   - component: {fileID: 1556044177581690584}
   m_Layer: 0
-  m_Name: Battery
+  m_Name: Diamond
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

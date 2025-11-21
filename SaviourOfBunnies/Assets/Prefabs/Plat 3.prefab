@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4477834194440594121}
   - component: {fileID: 4477834194440594120}
   m_Layer: 0
-  m_Name: Purple Gem
+  m_Name: Diamond
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
