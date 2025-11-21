@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public Object NextSceneAsset;
 
     [Header("UI")]
     public TextMeshProUGUI coinText;
@@ -36,11 +37,16 @@ public class GameManager : MonoBehaviour
             coinText.text = coins.ToString();
     }
 
-    public void LoadSceneByName(string sceneName)
+    private void LoadSceneByName(string sceneName)
     {
         CoinsManager.Instance.AddCoins(coins);
         SceneManager.LoadScene(sceneName);
     }
-    
+
+    public void LoadNextScene()
+    {
+        LoadSceneByName(NextSceneAsset.name);
+    }
+
     public int GetCoins() => coins;
 }
