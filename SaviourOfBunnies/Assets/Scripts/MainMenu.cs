@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Coins UI")]
     public TextMeshProUGUI coinsText;
+    public CoinsManager coinsManager;
     
     [Header("Click Sound")]
     public AudioClip clickSound;      

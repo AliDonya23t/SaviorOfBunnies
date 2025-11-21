@@ -492,7 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91552bf689876fa4886553117cc78aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsText: {fileID: 0}
+  coinsText: {fileID: 1734330745}
+  coinsManager: {fileID: 244533425}
   clickSound: {fileID: 8300000, guid: de22022ef00be5546bf8d38fb8267f2b, type: 3}
 --- !u!114 &1034818085
 MonoBehaviour:
