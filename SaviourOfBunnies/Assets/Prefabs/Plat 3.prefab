@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  collectSound: {fileID: 0}
+  collectSound: {fileID: 8300000, guid: 0fa1810601474254faab923dae0c331d, type: 3}
   vanishDuration: 0.3
 --- !u!1 &4477834194777557790
 GameObject:

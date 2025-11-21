@@ -3,12 +3,15 @@
 public class BatteryPickup : MonoBehaviour
 {
     public SpriteRenderer sr; 
-    public AudioClip pickupSound; 
+    public AudioClip pickupSound;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -21,11 +24,14 @@ public class BatteryPickup : MonoBehaviour
                 BatterySystem.Instance.EnterMine(); 
             }
 
-            
-            if (pickupSound != null)
-                AudioSource.PlayClipAtPoint(pickupSound, transform.position);
 
-            
+            if (pickupSound != null)
+            {
+                audioSource.clip = pickupSound;
+                audioSource.Play();
+            }
+
+
             gameObject.SetActive(false);
         }
     }

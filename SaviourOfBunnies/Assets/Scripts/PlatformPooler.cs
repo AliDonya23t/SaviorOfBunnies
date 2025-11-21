@@ -71,6 +71,7 @@ public class PlatformPooler : MonoBehaviour
             return;
         }
 
+        // انتخاب index برای prefab (مهم: ما از این idx برای مرجع گرفتن childها استفاده می‌کنیم)
         int idx = Random.Range(0, platformPrefabs.Length);
         GameObject go = pool.Dequeue();
 
@@ -82,21 +83,46 @@ public class PlatformPooler : MonoBehaviour
         go.transform.rotation = Quaternion.identity;
         go.SetActive(true);
 
-        // 🔹 ریست کردن الماس‌ها روی پلتفرم
-        foreach (Transform child in go.transform)
-        {
-            Diamond d = child.GetComponent<Diamond>();
-            if (d != null)
-            {
-                child.gameObject.SetActive(true);
+        // --- ریست یا بازسازی الماس‌ها مطابق با prefab مرجع ---
+        // خروجی: اگر prefab مرجع دارای childهایی با کامپوننت Diamond باشد، 
+        // اطمینان حاصل شود که این instance هم آن childها را (فعال) دارد.
+        GameObject sourcePrefab = platformPrefabs[idx];
 
-                // فقط رنگ و Collider ریست شود، scale دست نخورده باقی بماند
-                SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
-                if (sr != null) sr.color = new Color(1, 1, 1, 1);
-                Collider2D col = child.GetComponent<Collider2D>();
+        // 1) پیدا کردن تمام Transform های دارای Diamond در prefab مرجع
+        var prefabDiamondTransforms = sourcePrefab.GetComponentsInChildren<Diamond>(true);
+
+        // 2) برای هر الماس مرجع، چک کن آیا در instance یک الماس با نام/پوزیشن مشابه وجود دارد
+        foreach (var prefabDiamond in prefabDiamondTransforms)
+        {
+            // سعی می‌کنیم نزدیک‌ترین child را با نام یا موقعیت پیدا کنیم.
+            // ساده‌ترین و مطمئن‌ترین راه اینه که اسم prefab child را نگاه کنیم:
+            string childName = prefabDiamond.gameObject.name;
+
+            // جستجو در instance برای وجود نام مشابه
+            Transform existing = go.transform.Find(childName);
+            if (existing != null)
+            {
+                // اگر وجود داره، فقط مطمئن شو فعال و ریست شده
+                existing.gameObject.SetActive(true);
+                var sr = existing.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.color = new Color(1f, 1f, 1f, 1f);
+                var col = existing.GetComponent<Collider2D>();
                 if (col != null) col.enabled = true;
+                // OnEnable در Diamond ریست رو انجام میده
+            }
+            else
+            {
+                // اگر وجود نداره (احتمالاً چون قبلاً Destroy شده)، یک کپی از prefab child بساز
+                // و آن را به عنوان child پلتفرم فعلی اضافه کن، و local transform را حفظ کن.
+                Transform prefabTrans = prefabDiamond.transform;
+                GameObject newDiamond = Instantiate(prefabTrans.gameObject, go.transform);
+                // قرار دادن دقیق مکان محلی و چرخش و مقیاس مطابق prefab
+                newDiamond.transform.localPosition = prefabTrans.localPosition;
+                newDiamond.transform.localRotation = prefabTrans.localRotation;
+                newDiamond.transform.localScale = prefabTrans.localScale;
             }
         }
+        // --- پایان بازسازی الماسها ---
 
         activeList.Add(go);
         lastSpawnX = spawnX;
