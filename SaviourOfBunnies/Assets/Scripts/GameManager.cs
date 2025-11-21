@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        BatterySystem.Instance.EnterMine();
         UpdateUI();
     }
 

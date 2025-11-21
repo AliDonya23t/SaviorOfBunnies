@@ -83,16 +83,6 @@ public class PlatformPooler : MonoBehaviour
         go.transform.rotation = Quaternion.identity;
         go.SetActive(true);
 
-        // ⇩ ⇩ ⇩ این بلوک اضافه شده تا الماس‌های داخل پلتفرم دوباره فعال شوند ⇩ ⇩ ⇩
-        // اگر الماس‌ها داخل پلتفرم غیرفعال شده باشند، آن‌ها را پیدا و فعال می‌کنیم.
-        //var diamonds = go.GetComponentsInChildren<Diamond>(true);
-        //foreach (var d in diamonds)
-        //{
-        //    if (d != null && d.gameObject != null)
-        //        d.gameObject.SetActive(true);
-        //}
-        // ⇧ ⇧ ⇧ بلوک اضافه‌شده پایان ⇧ ⇧ ⇧
-
         activeList.Add(go);
         lastSpawnX = spawnX;
     }
