@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class BatterySystem : MonoBehaviour
 {
@@ -35,7 +34,7 @@ public class BatterySystem : MonoBehaviour
         if (!inMine) return;
 
         // کم کردن باتری
-        currentBattery -= Time.deltaTime;
+        currentBattery -= Time.deltaTime * Time.timeScale;
         if (currentBattery <= 0f)
         {
             currentBattery = 0f;
@@ -49,7 +48,8 @@ public class BatterySystem : MonoBehaviour
     private void GoToMenu()
     {
         // لود منوی اصلی
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.LoadNextScene();
     }
 
     private void UpdateBatteryUI()

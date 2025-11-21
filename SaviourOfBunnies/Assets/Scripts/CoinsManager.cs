@@ -5,16 +5,17 @@ using UnityEngine;
 public class CoinsManager : MonoBehaviour
 {
     public static CoinsManager Instance { get; private set; }
+    public static int CollectedCoins = 0;
 
     private const string COINS_KEY = "PlayerCoins";
     public int Coins { get; private set; }
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
-           Instance = this;
-           DontDestroyOnLoad(gameObject);
-           LoadCoins(); 
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            LoadCoins();
         }
         else
         {
