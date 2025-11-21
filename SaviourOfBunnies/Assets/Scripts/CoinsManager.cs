@@ -5,6 +5,15 @@ using UnityEngine;
 public class CoinsManager : MonoBehaviour
 {
     public static CoinsManager Instance { get; private set; }
+    public static bool CreateNewInstance()
+    {
+        if (Instance == null)
+        {
+            Instance = new CoinsManager();
+            return true;
+        }
+        return false;
+    }
     private const string COINS_KEY = "PlayerCoins";
     public int Coins { get; private set; }
     void Awake()
