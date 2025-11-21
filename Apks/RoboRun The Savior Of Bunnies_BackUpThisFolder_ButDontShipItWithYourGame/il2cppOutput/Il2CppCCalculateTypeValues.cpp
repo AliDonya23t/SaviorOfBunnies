@@ -52152,8 +52152,8 @@ struct CoinsManager_tA71727EAA6F7B4C202B9E1F7B652034084CA1C90  : public MonoBeha
 
 struct CoinsManager_tA71727EAA6F7B4C202B9E1F7B652034084CA1C90_StaticFields
 {
-	// CoinsManager CoinsManager::<Instance>k__BackingField
-	CoinsManager_tA71727EAA6F7B4C202B9E1F7B652034084CA1C90* ___U3CInstanceU3Ek__BackingField_4;
+	// CoinsManager CoinsManager::Instance
+	CoinsManager_tA71727EAA6F7B4C202B9E1F7B652034084CA1C90* ___Instance_4;
 	// System.Int32 CoinsManager::CollectedCoins
 	int32_t ___CollectedCoins_5;
 };

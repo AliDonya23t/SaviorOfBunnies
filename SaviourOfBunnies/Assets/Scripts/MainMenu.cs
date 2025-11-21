@@ -15,11 +15,12 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        CoinsManager.Instance.AddCoins(CoinsManager.CollectedCoins);
+        CoinsManager cm = CoinsManager.EnsureInstance();
+        cm.AddCoins(CoinsManager.CollectedCoins);
         CoinsManager.CollectedCoins = 0;
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        coinsText.text = CoinsManager.Instance.Coins.ToString();
+        coinsText.text = cm.Coins.ToString();
     }
 
     public void BtnExitClick()

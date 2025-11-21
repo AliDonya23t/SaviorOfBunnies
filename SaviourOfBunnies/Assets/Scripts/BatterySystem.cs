@@ -50,14 +50,7 @@ public class BatterySystem : MonoBehaviour
     private void GoToMenu()
     {
         // لود منوی اصلی
-        //SceneManager.LoadScene("MainMenu");
-        if (GameManager.Instance == null)
-        {
-            CoinsManager.CollectedCoins = int.Parse(GetComponent<TextMeshProUGUI>().text);
-            SceneManager.LoadScene("MainMenu");
-            return;
-        }
-        GameManager.Instance.LoadNextScene();
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void UpdateBatteryUI()

@@ -27,11 +27,6 @@ public class DeathZone : MonoBehaviour
             yield return new WaitForSeconds(0.5f); // اگر اشتباهی صدا نداشت
 
         // لود صحنه منو
-        if (GameManager.Instance == null)
-        {
-            CoinsManager.CollectedCoins = int.Parse(GetComponent<TextMeshProUGUI>().text);
-            SceneManager.LoadScene("MainMenu");
-        }
-        else GameManager.Instance.LoadNextScene();
+        SceneManager.LoadScene("MainMenu");
     }
 }

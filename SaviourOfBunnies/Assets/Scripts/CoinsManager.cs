@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class CoinsManager : MonoBehaviour
 {
-    public static CoinsManager Instance { get; private set; }
+    private static CoinsManager Instance;
     public static int CollectedCoins = 0;
+    public static CoinsManager EnsureInstance()
+    {
+        if (Instance != null) return Instance;
+        Instance = FindObjectOfType<CoinsManager>();
+        if (Instance != null) return Instance;
+        GameObject obj = new GameObject("CoinsManager");
+        Instance = obj.AddComponent<CoinsManager>();
+        DontDestroyOnLoad(obj);
+        Instance.LoadCoins();
+        return Instance;        
+    }
 
     private const string COINS_KEY = "PlayerCoins";
     public int Coins { get; private set; }
@@ -17,11 +28,12 @@ public class CoinsManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             LoadCoins();
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
     }
+
     private void LoadCoins()
     {
         Coins = PlayerPrefs.GetInt(COINS_KEY, 0);

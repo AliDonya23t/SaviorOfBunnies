@@ -58,12 +58,6 @@ public class PauseManager : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1f;
-        if (GameManager.Instance == null)
-        {
-            CoinsManager.CollectedCoins = int.Parse(GetComponent<TextMeshProUGUI>().text);
-            SceneManager.LoadScene("MainMenu");
-            return;
-        }
-        GameManager.Instance.LoadNextScene();
+        SceneManager.LoadScene("MainMenu");
     }
 }
