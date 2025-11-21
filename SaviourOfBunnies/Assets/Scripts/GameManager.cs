@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class GameManager : MonoBehaviour
             coinText.text = coins.ToString();
     }
 
+    public void LoadSceneByName(string sceneName)
+    {
+        CoinsManager.Instance.AddCoins(coins);
+        SceneManager.LoadScene(sceneName);
+    }
     
     public int GetCoins() => coins;
 }

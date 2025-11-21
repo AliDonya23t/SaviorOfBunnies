@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Coins UI")]
     public TextMeshProUGUI coinsText;
+    
     [Header("Click Sound")]
     public AudioClip clickSound;      
     private AudioSource audioSource;  
@@ -17,6 +18,7 @@ public class MainMenu : MonoBehaviour
         
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
+        coinsText.text = CoinsManager.Instance.Coins.ToString();
     }
 
     public void BtnExitClick()
