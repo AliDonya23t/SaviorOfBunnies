@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
 
     private void LoadSceneByName(string sceneName)
     {
-        CoinsManager.CreateNewInstance();
         CoinsManager.Instance.AddCoins(coins);
         SceneManager.LoadScene(sceneName);
     }
