@@ -310,7 +310,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0d05d917707b1c7439bd38a6b0c182eb, type: 3}
   - {fileID: 21300000, guid: 14def5c3149283f46b00c3b5fbb970e4, type: 3}
   displayImage: {fileID: 1096113407}
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 6c0a0ca463d380a40b069387896b7266, type: 3}
   imageSounds: []
   fadeDuration: 0.4
   displayDuration: 2
