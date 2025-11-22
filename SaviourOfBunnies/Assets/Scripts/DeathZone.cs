@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathZone : MonoBehaviour
 {
@@ -25,6 +27,6 @@ public class DeathZone : MonoBehaviour
             yield return new WaitForSeconds(0.5f); // اگر اشتباهی صدا نداشت
 
         // لود صحنه منو
-        GameManager.Instance.LoadNextScene();
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BatterySystem : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class BatterySystem : MonoBehaviour
         if (!inMine) return;
 
         // کم کردن باتری
-        currentBattery -= Time.deltaTime;
+        currentBattery -= Time.deltaTime * Time.timeScale;
         if (currentBattery <= 0f)
         {
             currentBattery = 0f;

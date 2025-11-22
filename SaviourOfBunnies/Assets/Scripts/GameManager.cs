@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+        CoinsManager.CollectedCoins += amount;
         UpdateUI();
     }
 
@@ -36,17 +37,5 @@ public class GameManager : MonoBehaviour
         if (coinText != null)
             coinText.text = coins.ToString();
     }
-
-    private void LoadSceneByName(string sceneName)
-    {
-        CoinsManager.Instance.AddCoins(coins);
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void LoadNextScene()
-    {
-        LoadSceneByName(NextSceneAsset.name);
-    }
-
     public int GetCoins() => coins;
 }
